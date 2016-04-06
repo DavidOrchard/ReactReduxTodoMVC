@@ -11,7 +11,7 @@ import './styles/styles.scss'; //Yep, that's right. You can import SASS/CSS file
 const store = configureStore();
 
 render(
-  <Provider store={store}>
-    <Router history={browserHistory} routes={routes} />
-  </Provider>, document.getElementById('app')
+	<Provider store={store}>
+     <Router history={browserHistory} routes={routes} />
+	</Provider>, document.getElementById('app')
 );
