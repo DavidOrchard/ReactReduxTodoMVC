@@ -54,6 +54,7 @@
     "file-loader": "0.8.5",
     "ignore-styles": "1.2.0",
     "mocha": "2.3.4",
+    "must": "^0.13.1",
     "node-sass": "3.4.2",
     "npm-run-all": "1.6.0",
     "rimraf": "2.5.0",
