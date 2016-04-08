@@ -1,4 +1,4 @@
-import {ADD_TODO} from '../constants/ActionTypes';
+import {ADD_TODO, TOGGLE_TODO} from '../constants/ActionTypes';
 
 // how about using the ADD_TODO action so that the property names aren't duplicated?
 const initialState = [
@@ -14,15 +14,36 @@ const initialState = [
 export default function todos(state = initialState, action) {
 	switch (action.type) {
 		case ADD_TODO:
-      // For this example, just simulating a save by changing date modified.
-      // In a real app using Redux, you might use redux-thunk and handle the async call in fuelSavingsActions.js
-			return [...state, 
+      return [...state, 
             {
               id: state.reduce((maxId, todo) => Math.max(todo.id, maxId), -1) + 1,
               completed: false,
               text: action.text
             }];
 
+    case TOGGLE_TODO: {
+      let foundIndex = -1;
+      const foundTodo = state.find((todo, index) => {
+        if(todo.id === action.id) {
+          foundIndex = index;
+          return true;
+        }
+        return false;
+      });
+
+      if(!foundTodo) {
+        return state;
+      }
+
+      return [...state.slice(0, foundIndex), 
+            {
+              id: foundTodo.id,
+              completed: !foundTodo.completed,
+              text: foundTodo.text
+            },
+            ...state.slice(foundIndex + 1)];
+      }
+      
 		default:
 			return state;
 	}

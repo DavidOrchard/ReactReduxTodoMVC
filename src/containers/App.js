@@ -4,7 +4,25 @@ import { bindActionCreators } from 'redux';
 import * as actions from '../actions/todoActions';
 import TodoItem from '../components/TodoItem';
 
+const ENTER_KEY = 13;
+
 class App extends Component {
+
+  handleNewTodoKeyDown (event) {
+    if (event.keyCode !== ENTER_KEY) {
+      return;
+    }
+
+    event.preventDefault();
+
+    var val = this.state.newTodo.trim();
+
+    if (val) {
+      this.props.model.addTodo(val);
+      this.setState({newTodo: ''});
+    }
+  }
+
   render() {
   
       console.log(this);
@@ -50,6 +68,7 @@ class App extends Component {
             <input
               className="new-todo"
               placeholder="What needs to be done?"
+              onKeyDown={this.handleNewTodoKeyDown}
               autoFocus={true}
             />
           </header>

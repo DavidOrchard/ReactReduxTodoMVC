@@ -27,6 +27,16 @@ describe('App', () => {
     it('should add todo', function() {
       expect(todos(stateBefore, action)).to.eql(stateAfter);
     });
-
   });
+
+  describe('toggle todo', function() {
+    const todo = {id:0, text:'learn Redux', completed:false};
+    const stateBefore = [todo];
+    const action = {type: 'TOGGLE_TODO', id:0};
+    const stateAfter = [{id:todo.id, text:todo.text, completed:!todo.completed}];
+    it('should add todo', function() {
+      expect(todos(stateBefore, action)).to.eql(stateAfter);
+    });
+  });
+
 });
