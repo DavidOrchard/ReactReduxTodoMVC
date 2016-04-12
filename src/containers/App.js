@@ -25,7 +25,6 @@ class App extends Component {
 
   render() {
   
-      console.log(this);
       var footer;
       var main;
       const { todos, actions } = this.props;
@@ -35,6 +34,7 @@ class App extends Component {
           <TodoItem
             key={todo.id}
             todo={todo}
+            onChange={actions.toggleTodo}
           />
         );
       }, this);

@@ -24,7 +24,7 @@ class TodoItem extends Component {
   }
 
   render() {
-    const { todo, completeTodo, deleteTodo } = this.props
+    const { todo, completeTodo, onChange, deleteTodo } = this.props
 
     let element
     if (this.state.editing) {
@@ -39,7 +39,7 @@ class TodoItem extends Component {
           <input className="toggle"
                  type="checkbox"
                  checked={todo.completed}
-                 onChange={() => completeTodo(todo.id)} />
+                 onChange={() => this.props.onChange(todo.id)} />
           <label onDoubleClick={this.handleDoubleClick.bind(this)}>
             {todo.text}
           </label>
@@ -53,7 +53,8 @@ class TodoItem extends Component {
       <li className={classnames({
         completed: todo.completed,
         editing: this.state.editing
-      })}>
+      })}
+      onChange={() => this.handleToggle(todo.id)}>
         {element}
       </li>
     )
