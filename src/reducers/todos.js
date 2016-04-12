@@ -22,28 +22,17 @@ export default function todos(state = initialState, action) {
             }];
 
     case TOGGLE_TODO: {
-      let foundIndex = -1;
-      const foundTodo = state.find((todo, index) => {
-        if(todo.id === action.id) {
-          foundIndex = index;
-          return true;
+      return state.map(todo => {
+        if(todo.id !== action.id) {
+          return todo;
         }
-        return false;
+        return {
+          ...todo,
+          completed: !todo.completed
+        };
       });
-
-      if(!foundTodo) {
-        return state;
-      }
-
-      return [...state.slice(0, foundIndex), 
-            {
-              id: foundTodo.id,
-              completed: !foundTodo.completed,
-              text: foundTodo.text
-            },
-            ...state.slice(foundIndex + 1)];
-      }
-      
+    }
+    
 		default:
 			return state;
 	}
