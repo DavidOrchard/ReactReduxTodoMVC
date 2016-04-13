@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import * as actions from '../actions/todoActions';
 import TodoItem from '../components/TodoItem';
 import Footer from '../components/Footer';
+import * as visibilityFilters from '../constants/constants';
 const ENTER_KEY = 13;
 
 class App extends Component {
@@ -28,7 +29,18 @@ class App extends Component {
       var main;
       const { todos, visibilityFilter, actions } = this.props;
 
-      var todoItems = todos.map(function (todo) {
+      var todoFilteredList = todos.filter((todo) => {
+        if(visibilityFilter === visibilityFilters.COMPLETED_TODOS) {
+          return todo.completed;
+        }
+        if(visibilityFilter === visibilityFilters.ACTIVE_TODOS) {
+          return !todo.completed;
+        }
+        // default is ALL
+        return true;
+      });
+
+      var todoItems = todoFilteredList.map(function (todo) {
         return (
           <TodoItem
             key={todo.id}
