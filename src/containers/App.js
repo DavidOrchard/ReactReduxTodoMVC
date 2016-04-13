@@ -16,11 +16,10 @@ class App extends Component {
 
     event.preventDefault();
 
-    var val = this.state.newTodo.trim();
+    var val = event.target.value.trim();
 
     if (val) {
-      this.props.model.addTodo(val);
-      this.setState({newTodo: ''});
+      this.props.actions.addTodo(val);
     }
   }
 
@@ -79,7 +78,7 @@ class App extends Component {
             <input
               className="new-todo"
               placeholder="What needs to be done?"
-              onKeyDown={this.handleNewTodoKeyDown}
+              onKeyDown={((event) => this.handleNewTodoKeyDown(event))}
               autoFocus={true}
             />
           </header>
