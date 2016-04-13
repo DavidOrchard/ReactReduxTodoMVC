@@ -7,3 +7,7 @@ export function addTodo(text) {
 export function toggleTodo(id) {
 	return { type: types.TOGGLE_TODO, id };
 }
+
+export function setVisibilityFilter(newFilter) {
+	return { type: types.SET_VISIBILITY_FILTER, newFilter };
+}

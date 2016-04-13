@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from '../actions/todoActions';
 import TodoItem from '../components/TodoItem';
-
+import Footer from '../components/Footer';
 const ENTER_KEY = 13;
 
 class App extends Component {
@@ -25,9 +25,8 @@ class App extends Component {
 
   render() {
   
-      var footer;
       var main;
-      const { todos, actions } = this.props;
+      const { todos, visibilityFilter, actions } = this.props;
 
       var todoItems = todos.map(function (todo) {
         return (
@@ -73,6 +72,7 @@ class App extends Component {
             />
           </header>
           {main}
+          <Footer visibilityFilter={visibilityFilter} onShow={actions.setVisibilityFilter}></Footer>
         </div>
       );
     }
@@ -80,12 +80,14 @@ class App extends Component {
 
 App.propTypes = {
   todos: PropTypes.array.isRequired,
+  visibilityFilter: PropTypes.string.isRequired,
   actions: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {
   return {
-    todos: state.todos
+    todos: state.todos,
+    visibilityFilter: state.visibilityFilter
   };
 }
 
